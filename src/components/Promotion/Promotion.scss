@@ -1,8 +1,6 @@
-.promotion {
 
+/* In your CSS file */
 
-
-}
 
 .promotion-title {
   padding: 80px;
@@ -58,4 +56,32 @@
   right: 110px !important;
   top: 460px !important;
   // margin-left: 900px !important;
+}
+/* Default styles for desktop view */
+.store-product-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.store-product-container-mobile {
+  display: none; /* Hidden by default on desktop */
+}
+
+/* Styles for mobile view */
+@media (max-width: 768px) {
+  .store-product-container {
+    display: none; /* Hide desktop catalog on mobile */
+  }
+
+  .store-product-container-mobile {
+    display: none; /* Hide mobile catalog by default */
+  }
+
+  .burger-icon {
+    display: block; /* Show burger icon on mobile */
+  }
+
+  .menu-open .store-product-container-mobile {
+    display: block; /* Show mobile catalog when burger menu is open */
+  }
 }

@@ -26,7 +26,16 @@ const Service = () => {
     AOS.init();
   }, []);
 
-  const handleClickToCatalog = (id) => {
+  const handleClickToCatalog = (subcategoryId) => {
+    axios
+      .get(`${URL}/shop/category_product/${subcategoryId}`)
+      .then((response) => {
+        console.log("API response for subcategory ID:", subcategoryId);
+        console.log(response.data.results);
+      })
+      .catch((error) => {
+        console.error("Error fetching data from API:", error);
+      });
     // const selectedItem = productsData.find((item) => item.id === id);
     // if (selectedItem) {
     //   console.log("Selected Item:", selectedItem);
@@ -64,7 +73,12 @@ const Service = () => {
         <div className="service-cards" data-aos="fade-up">
           <div className="service-column" data-aos="fade-up">
             {serviceData.map((item, key) => (
-              <div className="ser-card" data-aos="fade-up" key={key} onClick={handleClickToCatalog}>
+              <div
+                className="ser-card"
+                data-aos="fade-up"
+                key={key}
+                onClick={() => handleClickToCatalog(item.id)}
+              >
                 <img
                   className="ser-card-img"
                   src={item.image}

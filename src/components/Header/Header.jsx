@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import logo from "../../assets/images/logo.svg";
-import fb from "../../assets/images/facebook-icon.svg";
+import fb from "../../assets/images/vk-icon.svg";
 import tg from "../../assets/images/tg-icon.svg";
 import wp from "../../assets/images/wp-icon.svg";
 import cart from "../../assets/images/cart.svg";
@@ -105,6 +105,7 @@ export const Header = ({ onSearch }) => {
 
           <div className="header-search">
             <input
+            className="header-input"
               type="text"
               placeholder="поиск товара"
               value={query}
@@ -120,7 +121,7 @@ export const Header = ({ onSearch }) => {
 
           <div className="header-net">
             <div className="header-net-icon">
-              <img className="net-icon" src={fb} alt="" />
+              <a href="https://m.vk.com/istomshop "><img className="net-icon vk" src={fb} alt="" /></a>
             </div>
             <div className="header-net-icon">
               <img className="net-icon" src={tg} alt="" />
@@ -172,12 +173,13 @@ export const Header = ({ onSearch }) => {
                   style={{
                     display: "flex",
                     justifyContent: "center",
+                    alignItems:"center",
                     gap: "10px",
                     margin: "15px",
                   }}
                 >
                   <div className="header-net-icon">
-                    <img className="net-icon" src={fb} alt="" />
+                    <img className="net-icon vk" src={fb} alt="" />
                   </div>
                   <div className="header-net-icon">
                     <img className="net-icon" src={tg} alt="" />
@@ -193,7 +195,7 @@ export const Header = ({ onSearch }) => {
                     className="istom-btn"
                     style={{ width: "190px", height: "50px" }}
                   >
-                    Корзинка
+                    Корзина
                   </button>
                 </Link>
               </div>

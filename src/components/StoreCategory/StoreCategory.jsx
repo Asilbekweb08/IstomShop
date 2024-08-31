@@ -6,8 +6,14 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import axios from "axios";
 import { URL } from "../../hooks/hook";
+import { useParams } from "react-router-dom";
 
-function StoreCategory({ onCategoryClick, onSubcategoryClick }) {
+function StoreCategory({
+  onCategoryClick,
+  onSubcategoryClick,
+  onCategoryName,
+}) {
+  const {id}=useParams()
   const [productsData, setProductsData] = useState([]);
   const [categoryProducts, setCategoryProducts] = useState([]);
 
@@ -18,7 +24,7 @@ function StoreCategory({ onCategoryClick, onSubcategoryClick }) {
         setProductsData(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   const handleCategoryClick = (categoryId) => {
     onCategoryClick(categoryId);
@@ -33,6 +39,8 @@ function StoreCategory({ onCategoryClick, onSubcategoryClick }) {
       .catch((error) => {
         console.error("Error fetching data from API:", error);
       });
+      
+
   };
 
   const handleSubcategoryClick = (subcategoryId) => {
@@ -53,12 +61,18 @@ function StoreCategory({ onCategoryClick, onSubcategoryClick }) {
       <div className="storecategory">
         <div className="storecategory-acc">
           {productsData.map((product, index) => (
+            
+            
             <Accordion key={index}>
+              
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls={`panel${index + 1}-content`}
                 id={`panel${index + 1}-header`}
-                onClick={() => handleCategoryClick(product.id)} // Обработчик клика для названия категории
+                onClick={() => {
+                  handleCategoryClick(product.id);
+                  onCategoryName(product.name);
+                }} // Обработчик клика для названия категории
               >
                 <p>{product.name}</p>
               </AccordionSummary>
@@ -79,7 +93,6 @@ function StoreCategory({ onCategoryClick, onSubcategoryClick }) {
           ))}
         </div>
       </div>
-
     </div>
   );
 }

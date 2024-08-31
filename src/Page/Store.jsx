@@ -9,7 +9,7 @@ function Store({ searchResults }) {
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedCategoryName, setSelectedCategoryName] = useState("");
-
+  const [CategoryName,setCategoryName]=useState("")
   const handleSubcategoryClick = (subcategoryId) => {
     setSelectedSubcategory(subcategoryId);
   };
@@ -17,6 +17,10 @@ function Store({ searchResults }) {
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
   };
+  const categoryName=(CategoryName)=>{
+    setCategoryName(CategoryName)
+    
+  }
 
   return (
     <>
@@ -34,12 +38,14 @@ function Store({ searchResults }) {
           <StoreCategory
             onSubcategoryClick={handleSubcategoryClick}
             onCategoryClick={handleCategoryClick}
+            onCategoryName={categoryName}
           />
 
           <StoreProducts
             selectedCategory={selectedCategory}
             selectedSubcategory={selectedSubcategory}
             searchResults={searchResults}
+            categoryName={CategoryName}
           />
         </div>
       </div>

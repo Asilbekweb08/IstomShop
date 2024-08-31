@@ -23,7 +23,7 @@ export const BannerCarousel = () => {
           <div className="carousel-card">
             <div className="carousel-card-left">
               <p className="carousel-title">
-                Отбеливание <span className="istom-text">зубов</span>
+                Отбеливание <span className="istom-text"> зубов</span>
               </p>
               <p className="carousel-subtitle">
                 Достигните белоснежной улыбки с нашей линейкой инструментов от

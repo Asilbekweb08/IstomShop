@@ -6,10 +6,11 @@ import DetailDesk from "../components/DetailDesk/DetailDesk";
 import { URL } from "../hooks/hook";
 import { Analog } from "../components/Analog/Analog";
 import { Helmet } from "react-helmet";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function DetailsPage() {
   const { id } = useParams();
-
   const [productsData, setProductsData] = useState(null);
 
   useEffect(() => {
@@ -21,18 +22,39 @@ function DetailsPage() {
       .catch((err) => console.log(err));
   }, [id]);
 
+
   const handleClickToCard = (product) => {
     const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
     const existingProductIndex = existingCart.findIndex(
       (item) => item.id === product.id
     );
-
+  
     if (existingProductIndex !== -1) {
       existingCart[existingProductIndex].quantity += 1;
+      toast.success("Товар добавлен в корзину", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        className: 'toast-success',
+      });
     } else {
       existingCart.push({ ...product, quantity: 1 });
+      toast.success("Товар добавлен в корзину", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        className: 'toast-success',
+      });
     }
-
+  
     localStorage.setItem("cart", JSON.stringify(existingCart));
     console.log("Товар добавлен в корзину:", product);
   };
@@ -60,9 +82,6 @@ function DetailsPage() {
                 <DetailCard
                   image={productsData.image}
                   name={productsData.name}
-                  // quant={productsData.quantity}
-                  // quant={quant}
-
                   price={productsData.price}
                   firm={productsData.firm}
                   manufactured_city={productsData.manufactured_city}
@@ -71,14 +90,12 @@ function DetailsPage() {
                     productsData.category[0].main_category_name
                   }
                   images_set={productsData.images_set[0].image}
-                  // addToCart={() => handleClickToCard(productsData)}
                   quant={
                     productsData.quantity ||
                     (existingCartItem && existingCartItem.quantity) ||
                     1
                   }
                   addToCart={() => handleClickToCard(productsData)}
-                  // setQuant={setQuant}
                   key={productsData.id}
                   data-aos="fade-up"
                 />
@@ -92,6 +109,7 @@ function DetailsPage() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }

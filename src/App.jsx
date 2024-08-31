@@ -15,6 +15,7 @@ import Signup from "./Page/Signup";
 import DetailsPage from "./Page/DetailsPage";
 import ConnectButton from "./components/ConnectButton/ConnectButton";
 import { useState } from "react";
+import StoreCategory from "./components/StoreCategory/StoreCategory";
 
 function App() {
     // Состояние для хранения результатов поиска
@@ -34,10 +35,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/store" element={<Store searchResults={searchResults}  />} />
         <Route path="/delivery" element={<Delivery />} />
+        <Route path="/store/category:id" element={<StoreCategory />} />
+
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="store/:id" element={<DetailsPage/>} />
+        <Route path="/store/:id" element={<DetailsPage/>} />
         {/* <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} /> */}
 

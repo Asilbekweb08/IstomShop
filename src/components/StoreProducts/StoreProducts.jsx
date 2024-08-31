@@ -23,7 +23,10 @@ const StoreProducts = ({
   selectedSubcategory,
   searchResults,
   selectedCategory,
+  categoryName
 }) => {
+  console.log(selectedCategory);
+  
   const [productsData, setProductsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -33,6 +36,7 @@ const StoreProducts = ({
   useEffect(() => {
     console.log("searchResults:", searchResults);
   }, [searchResults]);
+
 
   useEffect(() => {
     if (selectedSubcategory) {
@@ -217,7 +221,7 @@ const StoreProducts = ({
         <div className="store-product-title">
           <p>
             {" "}
-            Наши <span className="istom-text">Новинки!</span>
+             <span className="istom-text">{categoryName}</span> 
           </p>
 
           <div className="sort-ac">

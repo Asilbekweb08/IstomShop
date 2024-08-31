@@ -5,6 +5,7 @@ import "./Connect.scss";
 import axios from "axios";
 import { URL } from "../../hooks/hook";
 import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
+import { toast } from "react-toastify";
 
 const Connect = () => {
   useEffect(() => {
@@ -25,6 +26,7 @@ const Connect = () => {
 
   // Function to handle form submission
   const handleSubmit = async () => {
+    toast.success("Получить консультацию")
     try {
       // Make a POST request to your API endpoint
       const response = await axios.post(`${URL}/shop/consultation`, formData);
@@ -57,7 +59,7 @@ const Connect = () => {
             <p className="istom-text">КОНСУЛЬТАЦИЮ</p>
           </div>
           <p className="con-left-subtitle">
-            Оставьте заявку и в ближайшее время мы с Вами свяжемся
+            Оставьте заявку  и, в ближайшее время мы с Вами свяжемся
           </p>
           <div className="name-input" data-aos="fade-up">
             <p>Ваше имя</p>

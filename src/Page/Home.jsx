@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeBanner from "../components/HomeBanner/HomeBanner";
 import About from "../components/About/About";
 import Service from "../components/Service/Service";
@@ -10,20 +10,30 @@ import Connect from "../components/Connect/Connect";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet";
-import { useState } from "react";
-import { useEffect } from "react";
 import ReactLoading from "react-loading";
+import { useInView } from "react-intersection-observer";
+
+function LazyBlock({ children }) {
+  const { ref, inView } = useInView({
+    triggerOnce: true, 
+    threshold: 0.3,     
+  });
+
+  return (
+    <div ref={ref} style={{ minHeight: "100px", transition: "opacity 1s ease-in-out", opacity: inView ? 1 : 0 }}>
+      {inView ? children : null}
+    </div>
+  );
+}
 
 function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Эмуляция задержки загрузки страницы
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 1500);
 
-    // Очистка таймера при размонтировании компонента
     return () => clearTimeout(timeout);
   }, []);
 
@@ -59,14 +69,14 @@ function Home() {
         </div>
       ) : (
         <div className="container">
-          <HomeBanner />
-          <About />
-          <Service />
-          <Products />
-          <BannerCarousel />
-          <Promotion />
-          <PartnersCarousel />
-          <Connect />
+          <LazyBlock><HomeBanner /></LazyBlock>
+          <LazyBlock><About /></LazyBlock>
+          <LazyBlock><Service /></LazyBlock>
+          <LazyBlock><Products /></LazyBlock>
+          <LazyBlock><BannerCarousel /></LazyBlock>
+          <LazyBlock><Promotion /></LazyBlock>
+          <LazyBlock><PartnersCarousel /></LazyBlock>
+          <LazyBlock><Connect /></LazyBlock>
           <ToastContainer />
         </div>
       )}
